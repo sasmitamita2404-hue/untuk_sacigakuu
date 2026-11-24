@@ -1,0 +1,1549 @@
+
+/* ===== GLOBAL ===== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'DM Sans', sans-serif;
+    background: #08172f;
+    color: #f5f0e8;
+    overflow-x: hidden;
+}
+
+button {
+    border: none;
+    background: none;
+}
+
+
+/* ===== OPENING PAGE ===== */
+.opening-page {
+    min-height: 100vh;
+    background: linear-gradient(
+        145deg,
+        #244d7d,
+        #102b52,
+        #07162f
+    );
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.opening-content {
+    position: relative;
+    z-index: 2;
+}
+
+.opening-title {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 36px;
+    line-height: 1.5;
+    margin-bottom: 65px;
+    animation: fadeIn 2s ease;
+}
+
+.envelope {
+    font-size: 100px;
+    color: #b8cce5;
+    cursor: pointer;
+    display: inline-block;
+    animation: floating 3s ease-in-out infinite;
+    transition: 0.4s;
+}
+
+.envelope:hover {
+    transform: scale(1.12);
+}
+
+.opening-text {
+    margin-top: 65px;
+    font-size: 17px;
+    letter-spacing: 1px;
+    animation: fadeIn 3s ease;
+}
+
+
+/* ===== BIRTHDAY PAGE ===== */
+.birthday-page {
+    min-height: 100vh;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    padding: 65px 20px;
+    background:
+        radial-gradient(circle at 15% 20%, #1b3c65 0%, transparent 30%),
+        radial-gradient(circle at 85% 80%, #19375c 0%, transparent 30%),
+        linear-gradient(160deg, #0c2042, #08162f, #102b50);
+    position: relative;
+    overflow: hidden;
+    opacity: 0;
+}
+
+.birthday-page.active {
+    display: flex;
+    animation: pageAppear 1.2s ease forwards;
+}
+
+.calendar-content {
+    width: 100%;
+    max-width: 380px;
+    text-align: center;
+    position: relative;
+    z-index: 2;
+}
+
+
+/* ===== BACKGROUND DECORATION ===== */
+.background-decoration {
+    position: absolute;
+    pointer-events: none;
+    color: #dce8fa;
+}
+
+.moon {
+    top: 55px;
+    right: 45px;
+    font-size: 55px;
+    color: #d7c9a8;
+    opacity: 0.85;
+    animation: floating 4s ease-in-out infinite;
+}
+
+.sparkle {
+    font-size: 25px;
+    animation: twinkle 2s ease-in-out infinite;
+}
+
+.sparkle-one {
+    top: 18%;
+    left: 12%;
+}
+
+.sparkle-two {
+    top: 35%;
+    right: 10%;
+    animation-delay: 0.5s;
+}
+
+.sparkle-three {
+    bottom: 20%;
+    left: 9%;
+    animation-delay: 1s;
+}
+
+.sparkle-four {
+    bottom: 12%;
+    right: 15%;
+    animation-delay: 1.5s;
+}
+
+.sparkle-five {
+    top: 12%;
+    left: 70%;
+    font-size: 16px;
+    animation-delay: 0.8s;
+}
+
+
+/* ===== CALENDAR HEADING ===== */
+.calendar-top-text {
+    font-size: 10px;
+    letter-spacing: 3px;
+    color: #c4d4e9;
+    margin-bottom: 12px;
+    animation: fadeIn 1.5s ease;
+}
+
+.calendar-subtitle {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 19px;
+    color: #f2e8d9;
+    margin-bottom: 30px;
+    animation: fadeIn 1.8s ease;
+}
+
+
+/* ===== CALENDAR CARD ===== */
+.calendar-card {
+    position: relative;
+    background: linear-gradient(
+        145deg,
+        #426995,
+        #284b76,
+        #1c3d65
+    );
+    border: 1px solid rgba(226, 235, 247, 0.35);
+    border-radius: 25px;
+    padding: 35px 22px 25px;
+    box-shadow:
+        0 20px 45px rgba(0, 0, 0, 0.35),
+        inset 0 0 25px rgba(255, 255, 255, 0.06);
+    animation: floating 4s ease-in-out infinite;
+}
+
+.calendar-month {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 40px;
+    margin-bottom: 0;
+    color: #fff4e7;
+}
+
+.calendar-year {
+    font-size: 12px;
+    letter-spacing: 5px;
+    color: #d8e2f0;
+    margin-top: 3px;
+    margin-bottom: 18px;
+}
+
+
+/* ===== RIBBON ===== */
+.calendar-ribbon {
+    position: absolute;
+    top: 18px;
+    right: -8px;
+    background: #e5d4bc;
+    color: #294466;
+    padding: 7px 13px;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    border-radius: 4px 0 0 4px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.calendar-ribbon i {
+    margin-right: 4px;
+}
+
+
+/* ===== CALENDAR DIVIDER ===== */
+.calendar-divider {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 13px;
+    color: #e8d7bd;
+    font-size: 14px;
+    margin-bottom: 20px;
+}
+
+
+/* ===== CALENDAR GRID ===== */
+.calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    justify-items: center;
+}
+
+.calendar-days {
+    font-size: 11px;
+    font-weight: 700;
+    color: #d7e3f2;
+    margin-bottom: 15px;
+}
+
+.calendar-dates {
+    row-gap: 13px;
+}
+
+.calendar-dates span {
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    border-radius: 50%;
+    position: relative;
+    transition: 0.3s;
+}
+
+.calendar-dates span:not(.birthday-date):hover {
+    background: rgba(255, 255, 255, 0.17);
+}
+
+
+/* ===== BIRTHDAY DATE ===== */
+.birthday-date {
+    background: #f1e4d2;
+    color: #193758;
+    font-weight: 700;
+    box-shadow: 0 0 15px rgba(241, 228, 210, 0.35);
+    animation: heartBeat 2s infinite;
+}
+
+.birthday-date i {
+    position: absolute;
+    top: -9px;
+    right: -5px;
+    color: #e8a6a9;
+    font-size: 10px;
+}
+
+
+/* ===== CARD DECORATION ===== */
+.calendar-decoration {
+    position: absolute;
+    color: #e9d8bd;
+    font-size: 28px;
+    animation: floating 3s ease-in-out infinite;
+}
+
+.star-one {
+    top: -16px;
+    left: 22px;
+}
+
+.star-two {
+    bottom: 75px;
+    right: 13px;
+    font-size: 24px;
+    animation-delay: 0.5s;
+}
+
+.star-three {
+    top: 100px;
+    left: 12px;
+    font-size: 18px;
+    animation-delay: 1s;
+}
+
+
+/* ===== CARD BOTTOM ===== */
+.calendar-bottom {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    margin-top: 25px;
+    padding-top: 15px;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    color: #e9d8bd;
+    font-size: 9px;
+    letter-spacing: 3px;
+}
+
+.calendar-bottom span:first-child,
+.calendar-bottom span:last-child {
+    font-size: 15px;
+}
+
+
+/* ===== NOTE ===== */
+.calendar-note {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin-top: 30px;
+    color: #e6d9c9;
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 15px;
+    animation: fadeIn 2s ease;
+}
+
+.calendar-note p {
+    margin: 0;
+}
+
+.note-star {
+    color: #d8c29f;
+    font-size: 13px;
+}
+
+
+/* ===== MUSIC ===== */
+.music-intro {
+    margin-top: 45px;
+}
+
+.music-intro p {
+    font-size: 13px;
+    color: #dce6f3;
+    margin-bottom: 15px;
+}
+
+
+.music-placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    width: fit-content;
+    min-width: 245px;
+    margin: 0 auto;
+    padding: 16px 20px;
+
+    background: rgba(48, 83, 123, 0.85);
+    border: 1px solid rgba(218, 226, 238, 0.25);
+    border-radius: 16px;
+
+    color: #f2e6d2;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+.music-placeholder i {
+    color: #e8d2ad;
+    font-size: 20px;
+}
+
+.music-placeholder:hover {
+    background: #3c6088;
+    transform: translateY(-3px);
+}
+
+
+/* ===== ANIMATIONS ===== */
+@keyframes floating {
+    0%, 100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes twinkle {
+    0%, 100% {
+        opacity: 0.35;
+        transform: scale(0.8);
+    }
+
+    50% {
+        opacity: 1;
+        transform: scale(1.2);
+    }
+}
+
+@keyframes heartBeat {
+    0%, 100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.13);
+    }
+}
+
+@keyframes pageAppear {
+    from {
+        opacity: 0;
+        transform: translateY(25px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes pageDisappear {
+    to {
+        opacity: 0;
+        visibility: hidden;
+    }
+}
+
+.opening-page.hide {
+    animation: pageDisappear 0.8s ease forwards;
+}
+
+
+/* ===== MOBILE ===== */
+@media (max-width: 576px) {
+
+    .opening-title {
+        font-size: 30px;
+    }
+
+    .envelope {
+        font-size: 85px;
+    }
+
+    .calendar-content {
+        max-width: 350px;
+    }
+
+    .calendar-card {
+        padding: 32px 15px 23px;
+    }
+
+    .calendar-month {
+        font-size: 36px;
+    }
+
+    .calendar-dates span {
+        width: 29px;
+        height: 29px;
+        font-size: 11px;
+    }
+
+    .calendar-days {
+        font-size: 10px;
+    }
+
+    .moon {
+        font-size: 40px;
+        right: 20px;
+        top: 25px;
+    }
+}
+
+
+/* ===== BIRTHDAY MESSAGE ===== */
+
+.message-page {
+    min-height: 100vh;
+    padding: 90px 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+    background:
+        radial-gradient(circle at 15% 20%, #1b3c65 0%, transparent 30%),
+        radial-gradient(circle at 85% 80%, #19375c 0%, transparent 30%),
+        linear-gradient(160deg, #102b50, #08162f, #0c2042);
+}
+
+.message-content {
+    width: 100%;
+    max-width: 420px;
+    text-align: center;
+    position: relative;
+    z-index: 2;
+    animation: fadeIn 1.5s ease;
+}
+
+.message-decoration {
+    font-size: 35px;
+    color: #e9d8bd;
+    margin-bottom: 15px;
+    animation: twinkle 2s infinite;
+}
+
+.message-label {
+    font-size: 10px;
+    letter-spacing: 3px;
+    color: #c4d4e9;
+    margin-bottom: 15px;
+}
+
+.message-title {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 35px;
+    color: #f5eadb;
+    margin-bottom: 30px;
+}
+
+.message-card {
+    position: relative;
+    padding: 35px 25px;
+    border: 1px solid rgba(226, 235, 247, 0.3);
+    border-radius: 20px;
+    background: linear-gradient(
+        145deg,
+        #315b83,
+        #1c3d65
+    );
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+}
+
+.message-icon {
+    font-size: 40px;
+    color: #e9d8bd;
+    margin-bottom: 25px;
+}
+
+.message-text {
+    font-family: 'Playfair Display', serif;
+    font-size: 16px;
+    line-height: 2;
+    color: #f5f0e8;
+    margin-bottom: 25px;
+}
+
+.message-closing {
+    font-size: 13px;
+    line-height: 1.9;
+    color: #dce6f3;
+    margin-bottom: 30px;
+}
+
+.message-signature {
+    padding-top: 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 13px;
+    color: #e9d8bd;
+}
+
+.message-bottom {
+    margin-top: 30px;
+    font-size: 12px;
+    letter-spacing: 1px;
+    color: #c4d4e9;
+}
+
+
+/* ===== MESSAGE MOBILE ===== */
+
+@media (max-width: 576px) {
+    .message-page {
+        padding: 75px 22px;
+    }
+
+    .message-title {
+        font-size: 30px;
+    }
+
+    .message-card {
+        padding: 30px 20px;
+    }
+
+    .message-text {
+        font-size: 15px;
+    }
+}
+
+/* ===== SCRAPBOOK SECTION ===== */
+
+.scrapbook-page {
+    position: relative;
+    min-height: 100vh;
+    padding: 100px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    background: linear-gradient(180deg, #102440, #172f50);
+    color: #f3e8d6;
+    text-align: center;
+}
+
+.scrapbook-content {
+    width: 100%;
+    max-width: 600px;
+    position: relative;
+    z-index: 1;
+}
+
+.scrapbook-label {
+    color: #d9c39f;
+    font-size: 11px;
+    letter-spacing: 4px;
+    margin-bottom: 15px;
+}
+
+.scrapbook-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 36px;
+    margin-bottom: 12px;
+}
+
+.scrapbook-subtitle {
+    color: #c3cede;
+    font-size: 13px;
+    margin-bottom: 45px;
+}
+
+.polaroid-card {
+    width: 260px;
+    margin: 0 auto;
+    padding: 13px 13px 20px;
+    background: #f2e8d8;
+    transform: rotate(-3deg);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+    transition: 0.3s ease;
+}
+
+.polaroid-card:hover {
+    transform: rotate(0deg) translateY(-5px);
+}
+
+.polaroid-image {
+    height: 230px;
+    background: linear-gradient(145deg, #496b91, #203c60);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    color: #f2e8d8;
+}
+
+.polaroid-image i {
+    font-size: 55px;
+    color: #e8d2ad;
+}
+
+.polaroid-image span {
+    font-size: 12px;
+    letter-spacing: 1px;
+}
+
+.polaroid-caption {
+    color: #45566a;
+    font-family: 'Playfair Display', serif;
+    font-size: 13px;
+    margin: 16px 0 0;
+}
+
+.scrapbook-note {
+    max-width: 350px;
+    margin: 55px auto 0;
+    color: #d4dbea;
+    font-family: 'Playfair Display', serif;
+    font-size: 16px;
+    font-style: italic;
+    line-height: 1.8;
+}
+
+@media (max-width: 576px) {
+    .scrapbook-title {
+        font-size: 30px;
+    }
+
+    .polaroid-card {
+        width: 235px;
+    }
+
+    .polaroid-image {
+        height: 205px;
+    }
+}
+
+
+/* Hiasan scrapbook */
+
+.polaroid-card {
+    position: relative;
+}
+
+.polaroid-card::before {
+    content: "";
+    position: absolute;
+    width: 85px;
+    height: 22px;
+    background: rgba(222, 205, 169, 0.75);
+    top: -10px;
+    left: 50%;
+    transform: translateX(-50%) rotate(-4deg);
+    z-index: 2;
+}
+
+.polaroid-card::after {
+    content: "✦";
+    position: absolute;
+    color: #e8cda5;
+    font-size: 35px;
+    top: -35px;
+    right: -35px;
+}
+
+.scrapbook-content::before {
+    content: "✧";
+    position: absolute;
+    color: #c9d5e5;
+    font-size: 28px;
+    left: 5px;
+    top: 180px;
+}
+
+.scrapbook-content::after {
+    content: "♡";
+    position: absolute;
+    color: #e8cda5;
+    font-size: 28px;
+    right: 5px;
+    bottom: 100px;
+}
+
+
+/* ===== CLOSING SECTION ===== */
+
+.closing-page {
+    min-height: 100vh;
+    padding: 100px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background: linear-gradient(180deg, #172f50, #0b1b30);
+    color: #f3e8d6;
+    position: relative;
+    overflow: hidden;
+}
+
+.closing-content {
+    max-width: 520px;
+    position: relative;
+    z-index: 1;
+}
+
+.closing-stars {
+    color: #d9c39f;
+    font-size: 23px;
+    margin-bottom: 35px;
+    letter-spacing: 5px;
+}
+
+.closing-label {
+    font-size: 10px;
+    letter-spacing: 5px;
+    color: #c6d2e2;
+    margin-bottom: 22px;
+}
+
+.closing-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 40px;
+    line-height: 1.4;
+    margin-bottom: 25px;
+}
+
+.closing-message {
+    max-width: 390px;
+    margin: 0 auto;
+    color: #c6d2e2;
+    font-size: 14px;
+    line-height: 2;
+}
+
+.closing-heart {
+    margin: 35px 0 20px;
+    color: #e8cda5;
+    font-size: 28px;
+}
+
+.closing-signature {
+    color: #e8d7bd;
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 14px;
+}
+
+.closing-date {
+    margin-top: 45px;
+    color: #9eafc5;
+    font-size: 11px;
+    letter-spacing: 5px;
+}
+
+@media (max-width: 576px) {
+    .closing-title {
+        font-size: 32px;
+    }
+
+    .closing-message {
+        font-size: 13px;
+    }
+}
+
+
+/* ===== SCROLL REVEAL ===== */
+
+.calendar-content,
+.message-content,
+.scrapbook-content,
+.closing-content {
+    opacity: 0;
+    transform: translateY(35px);
+    transition: opacity 1s ease, transform 1s ease;
+}
+
+.calendar-content.show,
+.message-content.show,
+.scrapbook-content.show,
+.closing-content.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+
+/* ===== TWINKLING STARS ===== */
+
+.sparkle {
+    animation: twinkle 2.5s ease-in-out infinite;
+}
+
+.sparkle-one {
+    animation-delay: 0s;
+}
+
+.sparkle-two {
+    animation-delay: 0.7s;
+}
+
+.sparkle-three {
+    animation-delay: 1.2s;
+}
+
+.sparkle-four {
+    animation-delay: 1.8s;
+}
+
+.sparkle-five {
+    animation-delay: 0.4s;
+}
+
+@keyframes twinkle {
+    0%, 100% {
+        opacity: 0.3;
+        transform: scale(0.8);
+    }
+
+    50% {
+        opacity: 1;
+        transform: scale(1.2);
+    }
+}
+
+/* ===== TWINKLING STARS ===== */
+
+.sparkle {
+    animation: twinkle 2.5s ease-in-out infinite;
+}
+
+.sparkle-one {
+    animation-delay: 0s;
+}
+
+.sparkle-two {
+    animation-delay: 0.7s;
+}
+
+.sparkle-three {
+    animation-delay: 1.2s;
+}
+
+.sparkle-four {
+    animation-delay: 1.8s;
+}
+
+.sparkle-five {
+    animation-delay: 0.4s;
+}
+
+@keyframes twinkle {
+    0%, 100% {
+        opacity: 0.3;
+        transform: scale(0.8);
+    }
+
+    50% {
+        opacity: 1;
+        transform: scale(1.2);
+    }
+}
+
+
+/* ===== MOON GLOW ===== */
+
+.moon {
+    animation: moonGlow 4s ease-in-out infinite;
+    filter: drop-shadow(0 0 8px rgba(225, 232, 255, 0.5));
+}
+
+@keyframes moonGlow {
+    0%, 100% {
+        filter: drop-shadow(0 0 8px rgba(225, 232, 255, 0.4));
+        opacity: 0.8;
+    }
+
+    50% {
+        filter: drop-shadow(0 0 22px rgba(225, 232, 255, 0.9));
+        opacity: 1;
+    }
+}
+
+
+/* Sembunyikan kalender saat opening */
+.birthday-page {
+    display: none;
+}
+
+/* Tampilkan kalender setelah amplop diklik */
+.birthday-page.active {
+    display: flex;
+}
+
+/* Pastikan halaman bisa di-scroll */
+body {
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+
+/* ===== BLOW CANDLE SECTION ===== */
+
+.candle-page {
+    min-height: 100vh;
+    padding: 100px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background: linear-gradient(180deg, #0b1b30, #172f50);
+    color: #f3e8d6;
+}
+
+.candle-content {
+    max-width: 550px;
+}
+
+.candle-label {
+    color: #d9c39f;
+    font-size: 11px;
+    letter-spacing: 4px;
+    margin-bottom: 20px;
+}
+
+.candle-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 34px;
+    margin-bottom: 15px;
+}
+
+.candle-description {
+    color: #c6d2e2;
+    font-size: 14px;
+    line-height: 1.8;
+}
+
+/* Kue ulang tahun */
+
+.birthday-cake {
+    width: 230px;
+    margin: 80px auto 45px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.cake-top {
+    width: 150px;
+    height: 35px;
+    background: #e8d2ad;
+    border-radius: 50%;
+    position: relative;
+    z-index: 2;
+}
+
+.cake-middle {
+    width: 175px;
+    height: 45px;
+    margin-top: -12px;
+    background: #a9b9ce;
+    border-radius: 12px 12px 18px 18px;
+}
+
+.cake-bottom {
+    width: 205px;
+    height: 50px;
+    margin-top: -5px;
+    background: #e8d2ad;
+    border-radius: 12px 12px 20px 20px;
+}
+
+/* Lilin */
+
+.candle {
+    width: 13px;
+    height: 48px;
+    background: repeating-linear-gradient(
+        45deg,
+        #f2e6d2,
+        #f2e6d2 5px,
+        #a9b9ce 5px,
+        #a9b9ce 10px
+    );
+    position: absolute;
+    bottom: 115px;
+    z-index: 3;
+    border-radius: 3px;
+}
+
+.flame {
+    width: 17px;
+    height: 24px;
+    background: #f7bd65;
+    border-radius: 50% 50% 50% 50%;
+    position: absolute;
+    top: -25px;
+    left: -2px;
+    box-shadow: 0 0 18px #f7bd65;
+    animation: flameFlicker 0.8s ease-in-out infinite alternate;
+    transform-origin: bottom;
+}
+
+@keyframes flameFlicker {
+    from {
+        transform: scale(1) rotate(-4deg);
+    }
+
+    to {
+        transform: scale(0.85) rotate(4deg);
+    }
+}
+
+/* Tombol tiup */
+
+.blow-button {
+    padding: 13px 28px;
+    border: 1px solid #d9c39f;
+    border-radius: 30px;
+    background: #e8d2ad;
+    color: #172f50;
+    font-size: 13px;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+.blow-button:hover {
+    background: #f3e8d6;
+    transform: translateY(-3px);
+}
+
+.candle-result {
+    margin-top: 25px;
+    color: #d9c39f;
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 14px;
+    opacity: 0;
+    transition: 0.5s ease;
+}
+
+.candle-result.show {
+    opacity: 1;
+}
+
+/* Kondisi setelah lilin ditiup */
+
+.flame.out {
+    display: none;
+}
+
+@media (max-width: 576px) {
+    .candle-title {
+        font-size: 28px;
+    }
+}
+
+
+/* Animasi kue bergerak */
+.birthday-cake {
+    animation: cakeFloat 3s ease-in-out infinite;
+}
+
+@keyframes cakeFloat {
+    0%, 100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+/* Animasi lilin bergoyang */
+.candle {
+    animation: candleMove 1.5s ease-in-out infinite alternate;
+    transform-origin: bottom center;
+}
+
+@keyframes candleMove {
+    from {
+        transform: rotate(-3deg);
+    }
+
+    to {
+        transform: rotate(3deg);
+    }
+}
+
+/* Api semakin hidup */
+.flame {
+    animation: flameFlicker 0.5s ease-in-out infinite alternate;
+}
+
+
+.flame.out {
+    animation: flameOut 0.4s ease forwards;
+}
+
+@keyframes flameOut {
+    to {
+        opacity: 0;
+        transform: scale(0);
+    }
+}
+
+
+/* ===== CONFETTI CELEBRATION ===== */
+
+.confetti {
+    position: fixed;
+    top: -15px;
+    z-index: 10000;
+    width: 9px;
+    height: 13px;
+    pointer-events: none;
+    animation: confettiFall 3s ease-in forwards;
+}
+
+@keyframes confettiFall {
+    0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 1;
+    }
+
+    100% {
+        transform: translateY(110vh) rotate(720deg);
+        opacity: 0;
+    }
+}
+
+
+/* ===== BACK TO TOP ===== */
+
+.back-to-top {
+    position: fixed;
+    right: 25px;
+    bottom: 90px;
+    z-index: 9998;
+
+    width: 43px;
+    height: 43px;
+
+    border: 1px solid rgba(232, 210, 173, 0.5);
+    border-radius: 50%;
+
+    background: #19304d;
+    color: #e8d2ad;
+    font-size: 18px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(10px);
+    transition: 0.3s ease;
+    cursor: pointer;
+}
+
+.back-to-top.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.back-to-top:hover {
+    background: #29496e;
+    transform: translateY(-4px);
+}
+
+@media (max-width: 576px) {
+    .back-to-top {
+        right: 15px;
+        bottom: 80px;
+    }
+}
+
+
+/* ===== ATUR TAMPILAN HALAMAN ===== */
+
+/* Sembunyikan semua bagian sebelum amplop dibuka */
+.birthday-page,
+.message-page,
+.scrapbook-page,
+.candle-page,
+.closing-page {
+    display: none;
+}
+
+/* Tampilkan semua bagian setelah amplop dibuka */
+.birthday-page.active,
+.message-page.active,
+.scrapbook-page.active,
+.candle-page.active,
+.closing-page.active {
+    display: flex;
+}
+
+
+/* FOTO SCRAPBOOK */
+
+.polaroid-image {
+    width: 100%;
+    height: 320px;
+    overflow: hidden;
+    background: #e8eef2;
+}
+
+.polaroid-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+}
+
+
+/* FOTO HATI SAAT LILIN DITIUP */
+
+.photo-heart {
+    position: fixed;
+    top: -120px;
+    width: 85px;
+    height: 85px;
+    padding: 4px;
+    background: #ffffff;
+    clip-path: path("M 42.5 80 C 35 72 3 49 3 27 C 3 3 32 -5 42.5 17 C 53 -5 82 3 82 27 C 82 49 50 72 42.5 80 Z");
+    z-index: 9999;
+    pointer-events: none;
+    animation: photoHeartFall linear forwards;
+}
+
+.photo-heart img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    clip-path: path("M 38.5 72 C 32 65 7 46 7 27 C 7 8 31 2 38.5 20 C 46 2 78 8 78 27 C 78 46 45 65 38.5 72 Z");
+}
+
+@keyframes photoHeartFall {
+    0% {
+        transform: translateY(0) rotate(-20deg);
+        opacity: 0;
+    }
+
+    10% {
+        opacity: 1;
+    }
+
+    100% {
+        transform: translateY(115vh) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+
+/* ===== RESPONSIVE HP ===== */
+
+@media screen and (max-width: 768px) {
+
+    body {
+        overflow-x: hidden;
+    }
+
+    .birthday-page,
+    .message-page,
+    .scrapbook-page,
+    .candle-page,
+    .closing-page {
+        width: 100%;
+        min-height: 100vh;
+        padding: 25px 16px;
+        box-sizing: border-box;
+    }
+
+    .polaroid-card {
+        max-width: 90%;
+        margin: 20px auto;
+    }
+
+    .polaroid-image {
+        height: 260px;
+    }
+
+    .photo-heart {
+        width: 65px;
+        height: 65px;
+    }
+
+    .music-placeholder {
+        max-width: 85%;
+    }
+
+    .back-to-top {
+        right: 15px;
+    }
+
+}
+
+
+/* ===== FINAL RESPONSIVE HP ===== */
+
+@media screen and (max-width: 576px) {
+
+    body {
+        width: 100%;
+        overflow-x: hidden;
+    }
+
+    /* Semua halaman */
+    .birthday-page,
+    .message-page,
+    .scrapbook-page,
+    .candle-page,
+    .closing-page {
+        width: 100%;
+        min-height: 100vh;
+        padding: 65px 20px;
+        box-sizing: border-box;
+    }
+
+    /* Opening */
+    .opening-title {
+        font-size: 28px;
+        padding: 0 15px;
+    }
+
+    .opening-text {
+        font-size: 14px;
+    }
+
+    /* Kalender */
+    .calendar-content {
+        width: 100%;
+        max-width: 350px;
+    }
+
+    .calendar-card {
+        width: 100%;
+        padding: 30px 12px 22px;
+    }
+
+    .calendar-month {
+        font-size: 34px;
+    }
+
+    .calendar-dates span {
+        width: 29px;
+        height: 29px;
+        font-size: 11px;
+    }
+
+    .music-placeholder {
+        width: 100%;
+        min-width: 0;
+        max-width: 280px;
+        padding: 13px 12px;
+        font-size: 12px;
+    }
+
+    /* Pesan ulang tahun */
+    .message-content {
+        width: 100%;
+    }
+
+    .message-title {
+        font-size: 29px;
+    }
+
+    .message-card {
+        padding: 27px 18px;
+    }
+
+    .message-text {
+        font-size: 14px;
+        line-height: 1.9;
+    }
+
+    /* Scrapbook */
+    .scrapbook-content {
+        width: 100%;
+    }
+
+    .scrapbook-title {
+        font-size: 29px;
+    }
+
+    .scrapbook-subtitle {
+        font-size: 12px;
+    }
+
+    .polaroid-card {
+        width: 235px;
+        max-width: 100%;
+    }
+
+    .polaroid-image {
+        height: 260px;
+    }
+
+    /* Kue ulang tahun */
+    .candle-content {
+        width: 100%;
+    }
+
+    .candle-title {
+        font-size: 28px;
+    }
+
+    .birthday-cake {
+        max-width: 100%;
+        transform-origin: center;
+    }
+
+    /* Penutup */
+    .closing-content {
+        width: 100%;
+    }
+
+    .closing-title {
+        font-size: 30px;
+    }
+
+    .closing-message {
+        font-size: 13px;
+    }
+
+    /* Foto hati: pertahankan ukuran sesuai clip-path */
+    .photo-heart {
+        width: 85px;
+        height: 85px;
+    }
+
+    /* Tombol kembali ke atas */
+    .back-to-top {
+        right: 12px;
+        bottom: 75px;
+    }
+
+}
